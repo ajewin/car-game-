@@ -1,2 +1,2 @@
 # car-game-
-its a car game  of computer graphics in c++.
+Car game made in  c++.

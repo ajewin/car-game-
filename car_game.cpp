@@ -50,10 +50,10 @@ void car_control(int key,int &car_x, int &car_y, int step){
     // up arrow: 38
     // right arrow: 39
     // down arrow: 40
-            if (key == 37) car_x -= step;
-            else if (key == 39) car_x += step;
-            else if (key == 38) car_y -= step;
-            else if (key == 40) car_y += step;
+            if (key == 75) car_x -= step;
+            else if (key == 77) car_x += step;
+            else if (key == 72) car_y -= step;
+            else if (key == 80) car_y += step;
         //clear the screen
         // redraw the road
         // redraw the car in the new position
@@ -77,15 +77,20 @@ int main() {
 
     int car_pos_x = 0;
     int car_pos_y = 0;
-    int step = 50;
+    int step = 160;
     while (true) {
         // Check key press
-        if (kbhit()) {
-            char key = getch();
-             if (key == 27) {
-                break;
+      if (kbhit()) {
+            char  ch= getch();
+            if (ch == 27) break;  // ESC key
+
+            if (ch == 0 || ch == -32) {  // special key prefix (platform-dependent)
+                ch = getch();  // get actual key code
+                car_control((int)ch, car_pos_x, car_pos_y, step);
             }
-            car_control(key,car_pos_x, car_pos_y, step);
+        }
+
+            // car_control(key,car_pos_x, car_pos_y, step);
                     
             cleardevice();
             draw_road();
@@ -94,7 +99,7 @@ int main() {
 
             delay(100); //fix continuos flickering
         }
-    }
+    
     setcolor(WHITE);
     settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
     outtextxy(10, 10, (char*)"Score: 0");

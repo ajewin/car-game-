@@ -46,14 +46,32 @@ void draw_car_red() {
 }
 
 void car_control(int key,int &car_x, int &car_y, int step){
-    // left arrow: 37
-    // up arrow: 38
-    // right arrow: 39
-    // down arrow: 40
-            if (key == 75) car_x -= step;
-            else if (key == 77) car_x += step;
-            else if (key == 72) car_y -= step;
-            else if (key == 80) car_y += step;
+    // left arrow: 75
+    // up arrow: 77
+    // right arrow: 72
+    // down arrow: 80
+    int min_x=0;
+    int min_y=0;
+    int max_x= getmaxx();
+    int max_y= getmaxy();
+            if (key == 75){
+                if (170 + car_x - step >= min_x) car_x -= step;
+
+            } 
+            else if (key == 77){
+                if (210 + car_x + step <= max_x){
+                    car_x += step;
+                }}
+            else if (key == 72){
+                if (car_y - step >= -400){
+                car_y -= step;
+                }
+            } 
+            else if (key == 80){
+                if (car_y + step <= 20){
+                car_y += step;
+                }
+            }
         //clear the screen
         // redraw the road
         // redraw the car in the new position
